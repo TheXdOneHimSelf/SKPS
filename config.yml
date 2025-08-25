@@ -100,28 +100,28 @@ opening_books:
 #       - BlackBook
     0.5+0:                          # 30 sec bullet games (0.5+0)
       selection: best_move
-      max_depth: 20                    # Limit book depth so engine evaluates positions
+#    max_depth: 20                    # Limit book depth so engine evaluates positions
       names:
         - nimas
     bullet_white:                            # Other bullet games (1+0)
-      selection: weighted_random
-      max_depth: 20                    # Limit book depth so engine evaluates positions
+      selection: best_move
+#     max_depth: 20                    # Limit book depth so engine evaluates positions
       names:
         - small
         - probook
     bullet_black:                            # Aggressive black bullet setup
       selection: best_move                # Always play strongest moves as black
-      max_depth: 15                    # Deeper book usage for black preparation
+#     max_depth: 15                    # Deeper book usage for black preparation
       names:
         - small
         - probook
     3+0:                             # Blitz games (5+3)
-      selection: weighted_random
+      selection: best_move
       names:
         - small
         - probook
     standard:                           
-      selection: weighted_random
+      selection: best_move
       names:
         - small
     antichess_white:
@@ -276,7 +276,7 @@ resign:
 # min_rating: 2300                        # Minimum rating of opponent to resign.
 
 challenge:                                # Incoming challenges.
-  concurrency: 1                          # Number of games to play simultaneously.
+  concurrency: 3                          # Number of games to play simultaneously.
   max_takebacks: 3                        # Maximum number of takebacks granted to a human.
   bullet_with_increment_only: false       # Whether bullet games against BOTs should only be accepted with increment.
 # min_increment: 0                        # Minimum amount of increment to accept a challenge.
@@ -307,26 +307,26 @@ challenge:                                # Incoming challenges.
   variants:                               # Chess variants to accept (https://lichess.org/variant).
     - standard
     - chess960
-    - fromPosition
+#   - fromPosition
     - antichess
-    - atomic
-    - crazyhouse
-    - horde
-    - kingOfTheHill
-    - racingKings
-    - threeCheck
+#   - atomic
+#   - crazyhouse
+#   - horde
+#   - kingOfTheHill
+#   - racingKings
+#   - threeCheck
   time_controls:                          # Speeds or time controls in initial_minutes+increment_seconds format to accept.
     - bullet
-    - blitz
-    - rapid
+#   - blitz
+#   - rapid
 #   - classical
-    - 25+0
+#   - 25+0
   bot_modes:                              # Game modes to accept against BOTs.
     - casual                              # Unrated games (accept casual games even if they don't meet min rating diff)
-    - rated                               # Rated games
+#   - rated                               # Rated games
   human_modes:                            # Game modes to accept against humans.
     - casual                              # Unrated games.
-    - rated                               # Rated games
+#   - rated                               # Rated games
 
 matchmaking:
   delay: 10                               # Time in seconds the bot must be idle before a new challenge is started.
@@ -394,10 +394,3 @@ books:
   black3check: "./books/black3check.bin"
   small: "./books/small.bin"
   nimas: "./books/nimas.bin"
-
-
-
-
-
-
-
