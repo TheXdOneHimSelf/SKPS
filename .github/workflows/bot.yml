@@ -1,4 +1,4 @@
-name: Lichess Bot
+name: Bot
 
 on:
   workflow_dispatch:  # Manual trigger
@@ -69,4 +69,4 @@ jobs:
       timeout-minutes: 340
       run: |
         echo "Starting bot..."
-        python3 user_interface.py -u
+        python3 -u user_interface.py matchmaking
