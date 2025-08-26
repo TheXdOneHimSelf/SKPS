@@ -1,50 +1,36 @@
-name: Test Bot
+name: Sync with Upstream BotLi
 
 on:
-  pull_request:
-    branches: [ main, master ]
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
-  test:
+  sync:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout
-      uses: actions/checkout@v5
-      
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-        
-    - name: Install dependencies
-      run: pip install PyYAML chess
-        
-    - name: Validate config
-      run: |
-        python3 << 'EOF'
-        import yaml
-        import sys
-        
-        try:
-            with open('config.yml', 'r') as f:
-                config = yaml.safe_load(f)
-            
-            required_sections = ['engines', 'opening_books', 'challenge']
-            for section in required_sections:
-                if section not in config:
-                    raise ValueError(f"Missing section: {section}")
-            
-            for engine_name, engine_config in config['engines'].items():
-                if 'uci_options' not in engine_config:
-                    raise ValueError(f"Engine {engine_name} missing uci_options")
-            
-            print("Config validation passed")
-            
-        except Exception as e:
-            print(f"Config validation failed: {e}")
-            sys.exit(1)
-        EOF
-        
-    - name: Test engine module
-      run: python3 -c "import chess.engine; print('Engine module available')"
+      - name: Checkout Fork
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Add Upstream Remote
+        run: git remote add upstream https://github.com/TheXdOneHimSelf/Indi.git
+
+      - name: Fetch Upstream
+        run: git fetch upstream
+
+      - name: Merge Upstream Changes
+        run: |
+          git checkout main
+          git merge upstream/main || true
+
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: main
+          destination_branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "Update from Upstream BotLi Repository"
+          pr_body: |
+            This PR updates the repository with the latest changes from the upstream BotLi repository.
