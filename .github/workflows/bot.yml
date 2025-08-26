@@ -1,6 +1,18 @@
 name: Bot
 
 on:
+  workflow_dispatch:
+    inputs:
+      tournament:
+        description: 'Tournament ID '
+        required: false
+        default: ''
+      matchmaking:
+        description: 'Tournament Username'
+        required: true
+        default: 'matchmaking'
+
+on:
   workflow_dispatch:  # Manual trigger
   schedule:
     - cron: '0 */6 * * *'
@@ -67,4 +79,4 @@ jobs:
     - name: Launch bot
       run: |
         echo "Starting bot..."
-        python3 -u user_interface.py matchmaking
+        python3 -u user_interface.py "${{ github.event.inputs.matchmaking }}" "${{ github.event.inputs.tournament
