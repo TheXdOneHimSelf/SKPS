@@ -15,7 +15,6 @@ env:
 jobs:
   deploy-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
     
     steps:
     - name: Checkout
@@ -66,7 +65,6 @@ jobs:
         EOF
         
     - name: Launch bot
-      timeout-minutes: 340
       run: |
         echo "Starting bot..."
         python3 -u user_interface.py matchmaking
