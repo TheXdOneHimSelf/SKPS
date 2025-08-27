@@ -3,10 +3,6 @@ name: Bot
 on:
   workflow_dispatch:
     inputs:
-      tournament:
-        description: 'Tournament'
-        required: false
-        default: ''
       matchmaking:
         description: 'matchmaking'
         required: true
@@ -77,4 +73,4 @@ jobs:
     - name: Launch bot
       run: |
         echo "Starting bot..."
-        python3 -u user_interface.py "${{ github.event.inputs.matchmaking }}" "${{ github.event.inputs.tournament }}"
+        python3 -u user_interface.py ${{ github.event.inputs.matchmaking }}
