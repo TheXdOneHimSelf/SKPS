@@ -3,8 +3,8 @@ name: Bot
 on:
   workflow_dispatch:
     inputs:
-      matchmaking:
-        description: 'matchmaking'
+      commands:
+        description: 'commands'
         required: true
         default: 'matchmaking'
 
@@ -73,4 +73,4 @@ jobs:
     - name: Launch bot
       run: |
         echo "Starting bot..."
-        python3 -u user_interface.py ${{ github.event.inputs.matchmaking }}
+        python3 -u user_interface.py ${{ github.event.inputs.commands }}
