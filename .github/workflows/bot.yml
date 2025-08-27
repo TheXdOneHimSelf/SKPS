@@ -79,4 +79,4 @@ jobs:
     - name: Launch bot
       run: |
         echo "Starting bot..."
-        python3 -u user_interface.py "${{ github.event.inputs.matchmaking }}" "${{ github.event.inputs.tournament
+        python3 -u user_interface.py "${{ github.event.inputs.matchmaking }}" "${{ github.event.inputs.tournament }}"
