@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       tournament:
-        description: 'Tournament ID '
+        description: 'Tournament'
         required: false
         default: ''
       matchmaking:
-        description: 'Tournament Username'
+        description: 'matchmaking'
         required: true
         default: 'matchmaking'
 
